@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Application</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="header"><strong>Blog Application</strong></div>
+<div class="topnav">
+    <a th:href="@{/}">Back</a>
+</div>
+<form action="#" th:action="@{/saveComment(id=${post.id})}" th:object="${comments}" method="POST">
+
+    <div>
+                    <textarea th:field="*{name}" rows="2" cols="80" th:type="text"
+                              placeholder="Your name..."></textarea>
+    </div>
+    <div>
+                    <textarea th:field="*{email}" rows="2" cols="80" th:type="text"
+                              placeholder="Your email..."></textarea>
+    </div>
+    <div>
+                    <textarea th:field="*{comment}" rows="5" cols="80" th:type="text"
+                              placeholder="Comment here..."></textarea>
+    </div>
+    <div>
+        <input type="submit" value="Comment">
+    </div>
+</form>
+</body>
+</html>

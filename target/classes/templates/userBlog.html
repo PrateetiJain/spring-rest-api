@@ -1,0 +1,58 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"  xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Blog Application</title>-->
+<!--    <link th:href="@{/css/main.css}" rel="stylesheet" />-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="topnav">-->
+<!--    <a th:href="@{/addPost}">Add Post</a>-->
+<!--    <a th:href="@{/}">Logout</a>-->
+<!--    <form action="#" th:action="@{/searchByTags}">-->
+<!--        <input type="text" placeholder="Search.." name="search">-->
+<!--        <input class="searchButton" type="submit" value="Search">-->
+<!--    </form>-->
+<!--    <a th:href="@{'/page/' + ${currentPage} + '?sortField=createdAt&sortDirection=asc' }">Oldest</a>-->
+<!--    <a th:href="@{'/page/' + ${currentPage} + '?sortField=createdAt&sortDirection=desc' }">Latest</a>-->
+<!--</div>-->
+<!--<div class ="grid-container">-->
+<!--    <div  th:each="post : ${listPost}">-->
+<!--        <div class="card">-->
+<!--            <div class="content">-->
+<!--                <h4 th:text="${post.title}"></h4>-->
+<!--                <p th:text="${post.excerpt}"></p>-->
+<!--                <form action="#" th:action="@{/readBlog(id=${post.id})}" method="POST">-->
+<!--                    <button type="submit">Read More</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <div th:if = "${totalPages > 1}">-->
+<!--        <div>-->
+<!--            <div>-->
+<!--                Total Rows: [[${totalItems}]]-->
+<!--            </div>-->
+<!--            <div >-->
+<!--                  <span th:each="i: ${#numbers.sequence(1, totalPages)}">-->
+<!--                  <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}">[[${i}]]</a>-->
+<!--                      <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;-->
+<!--                  </span>-->
+
+<!--                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}">Next</a>-->
+<!--                <span th:unless="${currentPage < totalPages}">Next</span>-->
+
+<!--                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}">Last</a>-->
+<!--                <span th:unless="${currentPage < totalPages}">Last</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+<!--<div class="footer"></div>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Application</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+    <div class="header"><strong>Blog Application</strong></div>
+    <div class="topnav">
+        <a th:href="@{/}">Back</a>
+    </div>
+    <div >
+        <form action ="#" th:action="@{/savePost}" th:object="${post}" method="POST">
+            <div>
+                <textarea rows="2" cols="100" th:type="text" placeholder="Author.." th:field="*{author}"></textarea>
+            </div>
+            <div>
+                <textarea rows="2" cols="100" th:type="text" placeholder="Title.." th:field="*{title}"></textarea>
+            </div>
+            <div>
+                <textarea rows="5" cols="100" th:type="text" placeholder="Excerpt.." th:field="*{excerpt}"></textarea>
+            </div>
+            <div>
+                <textarea rows="30" cols="100" th:type="text" placeholder="Write your blog..." th:field="*{content}"></textarea>
+            </div>
+            <div>
+                <textarea rows="2" cols="100"  placeholder="Tags.." name="tags"> [[${tags}]]</textarea>
+            </div>
+            <div>
+               <input type="submit" value="PUBLISH">
+            </div>
+        </form>
+    </div>
+    <div class="footer"></div>
+</body>
+</html>

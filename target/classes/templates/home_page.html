@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-spring5">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Application</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+
+</head>
+<body>
+    <div class="header"><strong>Blog Application</strong></div>
+    <div class="topnav">
+            <a th:href="@{/signIn}">SignIn</a>
+        <a th:href="@{/register}">Register</a>
+        <form action="#" th:action="@{'/page/' + ${currentPage}+ '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}+ ${keyword != null ? '&keyword=' + keyword : ''} + ${filterDate != null ? '&filterDate=' + filterDate : ''}}">
+            <input type="hidden" name="sortField" th:value="${sortField}">
+            <input type="hidden" name="sortDirection" th:value="${sortDirection}">
+            <input type="text" placeholder="Keyword.." name="keyword">
+            <input class="searchButton" type="submit" value="Search">
+        </form>
+        <div>
+            <a th:href = "@{'/page/' + ${currentPage} + '?sortField=createdAt&sortDirection=asc' + ${keyword != null ? '&keyword=' + keyword : ''} +${filterDate != null ? '&filterDate=' + filterDate : ''}}">Oldest</a>
+            <a th:href = "@{'/page/' + ${currentPage} + '?sortField=createdAt&sortDirection=desc' + ${keyword != null ? '&keyword=' + keyword : ''} + ${filterDate != null ? '&filterDate=' + filterDate : ''}}">Latest</a>
+        </div>
+        <div>
+            <form th:action="@{/filterByDate}">
+                <input type="date" placeholder="Enter date" name="filterDate">
+                <input type="submit" value="Filter">
+            </form>
+        </div>
+        <a th:href="@{/addPost}">New Post</a>
+       <a th:href="@{/logout}">Logout</a>
+    </div>
+    <div class ="grid-container">
+       <div  th:each="post : ${listPost}">
+           <div class="card">
+               <div class="content">
+                   <h4 th:text="${post.title}"></h4>
+                   <p th:text="${post.excerpt}"></p>
+                   <p th:text="${#dates.format(post.createdAt, 'dd-MMM-yyyy')}"></p>
+                   <form action="#" th:action="@{/readBlog(id=${post.id})}" method="post">
+                       <button type="submit">Read More</button>
+                   </form>
+                </div>
+           </div>
+       </div>
+    </div>
+    <div>
+        <div th:if = "${totalPages > 1}">
+            <div>
+                Total Rows: [[${totalItems}]]  &nbsp; &nbsp;
+                <a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage -1}+ '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${keyword != null ? '&keyword=' + keyword : ''} + ${filterDate != null ? '&filterDate=' + filterDate : ''}}">Prev</a>
+                <span th:unless="${currentPage > 1}">Prev</span>
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">&nbsp;<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${keyword != null ? '&keyword=' + keyword : ''} + ${filterDate != null ? '&filterDate=' + filterDate : ''} }">[[${i}]]</a>
+                    <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp;
+                </span>   &nbsp;
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${keyword != null ? '&keyword=' + keyword : ''} + ${filterDate != null ? '&filterDate=' + filterDate : ''}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+</body>
+</html>
